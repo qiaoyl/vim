@@ -42,3 +42,7 @@ def ToUnicode( value ):
     return str( value, 'utf8' )  
   return str( value )  
   ```
+#### ultisnips与YCM一起 tab 键冲突，无法完成自动填写
+- 参考[issue#732](https://github.com/SirVer/ultisnips/issues/732)
+
+>      `inoremap <Tab> <c-r>=UltiSnips#ExpandSnippet()<cr>`

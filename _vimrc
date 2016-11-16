@@ -35,6 +35,20 @@ Plugin 'https://github.com/vim-scripts/LaTeX-Suite-aka-Vim-LaTeX.git'
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_server_keep_logfiles=1
 let g:ycm_log_level='debug'
+Plugin 'kien/ctrlp.vim'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+inoremap <Tab> <c-r>=UltiSnips#ExpandSnippet()<cr>
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 
 syntax on           "开启语法高亮
 set mouse=a         "控制台启用鼠标
