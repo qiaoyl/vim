@@ -42,7 +42,15 @@ def ToUnicode( value ):
     return str( value, 'utf8' )  
   return str( value )  
   ```
+
 #### ultisnips与YCM一起 tab 键冲突，无法完成自动填写
 - 参考[issue#732](https://github.com/SirVer/ultisnips/issues/732)
 
 >      `inoremap <Tab> <c-r>=UltiSnips#ExpandSnippet()<cr>`
+
+## 配色方案
+- 自动变换配色 [vim-plugin-random-colorscheme-picker](https://github.com/sunuslee/vim-plugin-random-colorscheme-picker)
+
+## 修改字体 Source Code Pro + YaHei
+- 修改注册表 `HKLM/Software/Microsoft/Windows NT/CurrentVersion/FontLink/SystemLink`,Create a Multistring Value添加`Source Code Pro`
+`Value`里添加`Microsoft YaHei Mono.ttf,Microsoft YaHei Mono,128,96`

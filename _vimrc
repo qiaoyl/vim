@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+set nocompatible    "非兼容模式
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -29,17 +29,17 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'ascenator/L9', {'name': 'newL9'}
 " python_mode
 Plugin 'https://github.com/klen/python-mode.git'
+Plugin 'nathanaelkane/vim-indent-guides'
 "python_editing.vim
 Plugin 'taglist.vim'
 Plugin 'https://github.com/vim-scripts/LaTeX-Suite-aka-Vim-LaTeX.git'
 Plugin 'Valloric/YouCompleteMe'
-let g:ycm_server_keep_logfiles=1
-let g:ycm_log_level='debug'
 Plugin 'kien/ctrlp.vim'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -49,6 +49,27 @@ inoremap <Tab> <c-r>=UltiSnips#ExpandSnippet()<cr>
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+set filetype=python
+au BufNewFile,BufRead *.py,*.pyw setf python
+au BufNewFile,BufRead *vimrc setf vim
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+let g:ycm_server_keep_logfiles=1
+let g:ycm_log_level='debug'
 
 syntax on           "开启语法高亮
 set mouse=a         "控制台启用鼠标
@@ -59,14 +80,15 @@ set magic           "使用正则时，除了$ . * ^以外的元字符都要加�
 set hlsearch        "搜索时高亮显示
 set nobackup        "无备份
 set history=400
-"set guifont=Monaco:h12
 set guifont=Source\ Code\ Pro:h12
+"set guifont=Microsoft\ Yahei\ Mono:h12
 autocmd BufEnter *.tex set guifont=Microsoft\ Yahei\ Mono:h12
 
 " 自动重新加载vimrc文件
 autocmd! bufwritepost _vimrc source %
 
 filetype on
+"filetype plugin on
 filetype indent on
 
 "Set mapleader
@@ -81,7 +103,7 @@ if exists("&ambiwidth")
 endif
 
 "使gvim启动时最大化
-au GUIEnter * simalt ~x
+"au GUIEnter * simalt ~x
 
 "Favorite filetype
 set ffs=unix,dos,mac
@@ -89,7 +111,6 @@ set ffs=unix,dos,mac
 nmap <leader>fd :se ff=dos<cr>
 nmap <leader>fu :se ff=unix<cr>
 
-"光标在窗口上下边界时距离边界7行即开始滚屏
 set so=7
 
 "Turn on WiLd menu
@@ -277,13 +298,13 @@ endif
 " => HTML related
 """"""""""""""""""""""""""""""
 " HTML entities - used by xml edit plugin
-let xml_use_xhtml = 1
-"let xml_no_auto_nesting = 1
-
-"To HTML
-let html_use_css = 0
-let html_number_lines = 0
-let use_xhtml = 1
+"qiaolet xml_use_xhtml = 1
+"qiao"let xml_no_auto_nesting = 1
+"qiao
+"qiao"To HTML
+"qiaolet html_use_css = 0
+"qiaolet html_number_lines = 0
+"qiaolet use_xhtml = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MISC
@@ -347,9 +368,6 @@ set guioptions-=T   "不显示工具栏
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
             \| exe "normal g'\"" | endif
 
-set filetype=python
-au BufNewFile,BufRead *.py,*.pyw setf python
-au BufNewFile,BufRead *vimrc setf vim
 
 set helplang=cn
 
@@ -384,21 +402,21 @@ let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口
 map <F3> :Tlist<cr>
 
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '*ku*'
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists={'default' : '', 'vimshell' : $HOME.'/.vimshell_hist', 'scheme' : $HOME.'/.gosh_completions'}
-
+"qiaolet g:acp_enableAtStartup = 0
+"qiao" Use neocomplcache.
+"qiaolet g:neocomplcache_enable_at_startup = 1
+"qiao" Use smartcase.
+"qiaolet g:neocomplcache_enable_smart_case = 1
+"qiao" Use camel case completion.
+"qiaolet g:neocomplcache_enable_camel_case_completion = 1
+"qiao" Use underbar completion.
+"qiaolet g:neocomplcache_enable_underbar_completion = 1
+"qiao" Set minimum syntax keyword length.
+"qiaolet g:neocomplcache_min_syntax_length = 3
+"qiaolet g:neocomplcache_lock_buffer_name_pattern = '*ku*'
+"qiao" Define dictionary.
+"qiaolet g:neocomplcache_dictionary_filetype_lists={'default' : '', 'vimshell' : $HOME.'/.vimshell_hist', 'scheme' : $HOME.'/.gosh_completions'}
+"qiao
 
 " Load rope plugin
 let g:pymode_rope = 1
@@ -444,11 +462,9 @@ map <leader>im :RopeAutoImport<cr>
 autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
-" 缩进线
-let g:indent_guides_guide_size=1 "宽度为1
 
 " 格式化js代码
-nnoremap <silent> <leader>js :call g:Jsbeautify()<cr>
+"qiaonnoremap <silent> <leader>js :call g:Jsbeautify()<cr>
 
 " tab转换为4个空格tab to space
 map <leader>t2s :%s/<tab>/    /g<cr>
@@ -458,7 +474,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 set cc=79 " 最大宽度 set colorcolumn=79
-set fo+=m " 中文40个字条
+set fo+=mM " 中文40个字条
 set tw=79
 
 " ;ig高亮当前列
@@ -467,8 +483,14 @@ set tw=79
 highlight ColorColumn guibg=DarkGray
 highlight ColorColumn ctermbg=DarkGray
 
+" python_editing.vim
+" F折叠当前文件的Python代码，f折叠光标所在函数（类）的代码
+" 初始化折叠所有代码
+"qiaocall ToggleFold()
 
-
+" 缩进线
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size=1 "宽度为1
 
 " ctrlp.vim
 " https://github.com/kien/ctrlp.vim.git
@@ -510,11 +532,11 @@ let g:Powerline_stl_path_style = 'full'
 
 " 自动完成[tab]键
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"qiaoautocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"qiaoautocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"qiaoautocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"qiaoautocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"qiaoautocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 set guioptions-=L " 隐藏左侧滚动条
 set guioptions-=r " 隐藏右侧滚动条
@@ -532,64 +554,7 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "let g:mwDefaultHighlightingNum = 9
 
 "jinja
-au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
+"qiaoau BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
 
 " 将jj做为esc，因为自动提示好像有问题，所以这里按了3下esc
 imap jj <esc><esc><esc>
-
-
-
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
-
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
-endfunction
-
-" python_editing.vim
-" F折叠当前文件的Python代码，f折叠光标所在函数（类）的代码
-" 初始化折叠所有代码
-"call ToggleFold()
