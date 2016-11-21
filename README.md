@@ -9,7 +9,7 @@
   ```cmake -G "<generator>" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp```
 - 打开纯英文的文件正常，打开含有中文的文件出现非常多的错误，参考[YouCompleteMe插件安装全攻略和问题总结](http://blog.csdn.net/mergerly/article/details/51684155)
 
-> 这个问题需要修改用到转码的地方改为支持GBK，即把字符先gbk decode, 再encode成utf8
+> 这个问题需要修改用到转码的地方改为支持GBK，即把字符先gbk decode, 再encode成utf8，如果输入代码的过程中有中文，还是会报错
 修改文件 /usr/share/vim/vim74/plugin/YouCompleteMe/third_party/ycmd/ycmd/utils.py中的函数ToUnicode
 ```
 # Returns a unicode type; either the new python-future str type or the real  

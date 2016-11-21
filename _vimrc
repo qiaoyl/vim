@@ -39,7 +39,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
-
+Plugin 'fholgado/minibufexpl.vim'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -53,21 +53,58 @@ set filetype=python
 au BufNewFile,BufRead *.py,*.pyw setf python
 au BufNewFile,BufRead *vimrc setf vim
 
+" latex
+set shellslash
+set grepprg=grep\ -nH\ $*
+filetype indent on
+let g:tex_flavor='latex'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Load rope plugin
+let g:pymode_rope = 1
+" Auto create and open ropeproject
+let g:pymode_rope_auto_project = 1
+" Enable autoimport
+let g:pymode_rope_enable_autoimport = 1
+" Auto generate global cache
+let g:pymode_rope_autoimport_generate = 1
+let g:pymode_rope_autoimport_underlineds = 1
+let g:pymode_rope_codeassist_maxfixes = 10
+let g:pymode_rope_sorted_completions = 1
+let g:pymode_rope_extended_complete = 1
+let g:pymode_rope_autoimport_modules = ["os","shutil","datetime","re","urllib","urllib2"]
+let g:pymode_rope_confirm_saving = 1
+let g:pymode_rope_global_prefix = "<C-x>p"
+let g:pymode_rope_local_prefix = "<C-c>r"
+let g:pymode_rope_vim_completion = 0
+let g:pymode_rope_guess_project = 0
+let g:pymode_rope_goto_def_newwin = ""
+let g:pymode_rope_always_show_complete_menu = 0
+
+let g:pymode_lint = 1
+" Switch pylint, pyflakes, pep8, mccabe code-checkers
+" Can have multiply values "pep8,pyflakes,mcccabe"
+let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
+
+"zc是折叠代码的命令，zo是展开代码,shift+k，查看光标处的函数的文档
+" 但是pymode提供的折叠好像有问题，将其禁用，用python_edit.vim代替
+let pymode_folding = 0
+
+" pymode的跳转到函数定义处Ctrl c放开后按g，重新定义为Ctrl g了
+map <C-g> <C-c>g
+
+" 自动import g:pymode_rope_autoimport_modules中定义的但是当前py文件还没有import的
+map <leader>im :RopeAutoImport<cr>
+
+" django
+"au FileType python set ft=python.django
+"au FileType html set ft=htmldjango.html
+
+"显示了python文档并完成选择后，窗口关闭
+autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+
+
 let g:ycm_server_keep_logfiles=1
 let g:ycm_log_level='debug'
 
@@ -418,50 +455,6 @@ map <F3> :Tlist<cr>
 "qiaolet g:neocomplcache_dictionary_filetype_lists={'default' : '', 'vimshell' : $HOME.'/.vimshell_hist', 'scheme' : $HOME.'/.gosh_completions'}
 "qiao
 
-" Load rope plugin
-let g:pymode_rope = 1
-" Auto create and open ropeproject
-let g:pymode_rope_auto_project = 1
-" Enable autoimport
-let g:pymode_rope_enable_autoimport = 1
-" Auto generate global cache
-let g:pymode_rope_autoimport_generate = 1
-let g:pymode_rope_autoimport_underlineds = 1
-let g:pymode_rope_codeassist_maxfixes = 10
-let g:pymode_rope_sorted_completions = 1
-let g:pymode_rope_extended_complete = 1
-let g:pymode_rope_autoimport_modules = ["os","shutil","datetime","re","urllib","urllib2"]
-let g:pymode_rope_confirm_saving = 1
-let g:pymode_rope_global_prefix = "<C-x>p"
-let g:pymode_rope_local_prefix = "<C-c>r"
-let g:pymode_rope_vim_completion = 0
-let g:pymode_rope_guess_project = 0
-let g:pymode_rope_goto_def_newwin = ""
-let g:pymode_rope_always_show_complete_menu = 0
-
-let g:pymode_lint = 1
-" Switch pylint, pyflakes, pep8, mccabe code-checkers
-" Can have multiply values "pep8,pyflakes,mcccabe"
-let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
-
-"zc是折叠代码的命令，zo是展开代码,shift+k，查看光标处的函数的文档
-" 但是pymode提供的折叠好像有问题，将其禁用，用python_edit.vim代替
-let pymode_folding = 0
-
-" pymode的跳转到函数定义处Ctrl c放开后按g，重新定义为Ctrl g了
-map <C-g> <C-c>g
-
-" 自动import g:pymode_rope_autoimport_modules中定义的但是当前py文件还没有import的
-map <leader>im :RopeAutoImport<cr>
-
-" django
-"au FileType python set ft=python.django
-"au FileType html set ft=htmldjango.html
-
-"显示了python文档并完成选择后，窗口关闭
-autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
-
 
 " 格式化js代码
 "qiaonnoremap <silent> <leader>js :call g:Jsbeautify()<cr>
@@ -511,12 +504,6 @@ let g:ctrlp_follow_symlinks=1
 " ctags跳转
 " <C-]>函数定义处 <C-t>返回 <C-o>
 
-" latex
-set shellslash
-set grepprg=grep\ -nH\ $*
-filetype indent on
-let g:tex_flavor='latex'
-
 " python
 map [r :w <CR>:! python % <CR>
 
@@ -558,3 +545,17 @@ let g:mwDefaultHighlightingPalette = 'extended'
 
 " 将jj做为esc，因为自动提示好像有问题，所以这里按了3下esc
 imap jj <esc><esc><esc>
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
