@@ -54,3 +54,9 @@ def ToUnicode( value ):
 ## 修改字体 Source Code Pro + YaHei
 - 修改注册表 `HKLM/Software/Microsoft/Windows NT/CurrentVersion/FontLink/SystemLink`,Create a Multistring Value添加`Source Code Pro`
 `Value`里添加`Microsoft YaHei Mono.ttf,Microsoft YaHei Mono,128,96`
+## 终于搞定latex修改后的对齐问题
+- 参考[用 Vim 高效地编辑 LaTeX 文档](https://mssun.me/blog/tips-vim-latex.html)
+> gq家族 根据 textwidth 自动换行
+> - gqgq 换行当前段
+> - gqap 格式化整个段
+> - {Visual}gq 格式化选定的部分
